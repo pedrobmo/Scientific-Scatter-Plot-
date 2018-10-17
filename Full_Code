@@ -1,0 +1,35 @@
+import matplotlib.pyplot as plt 
+from matplotlib import *
+from pylab import *
+import numpy as np
+import statistics
+from statistics import stdev
+
+#This is just a sample data 
+y1 = [6,5,6,7,8]
+y2 = [8,9,10,10,11]
+y3 = [14,15,16,14,14]
+y4 = [16,17,18,19,18]
+
+
+y1_mean = statistics.mean(y1)
+y2_mean = statistics.mean(y2)
+y3_mean = statistics.mean(y3)
+y4_mean = statistics.mean(y4)
+
+y = np.array([y1_mean, y2_mean, y3_mean, y4_mean])
+#Just sample data for x values 
+x = np.array([3,5,6,8])
+e = np.array([stdev(y1), stdev(y2), stdev(y3), stdev(y4)])
+
+plt.plot(np.unique(x), np.poly1d(np.polyfit(x, y, 1))(np.unique(x)))
+
+plt.errorbar(x, y, e, linestyle = 'none')
+
+plt.scatter(x, y, color = 'k')
+
+#Can change the labels and title to your preference
+plt.xlabel('x-coordinates')
+plt.ylabel('y-coordinates')
+plt.title('Sample graph')
+plt.show()
